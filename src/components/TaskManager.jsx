@@ -12,14 +12,18 @@ const FILTERS = {
  * TaskManager component for managing tasks
  */
 const TaskManager = () => {
-  const [tasks, setTasks] = useLocalStorage('tasks', []);
+  const [tasks, setTasks] = useLocalStorage('lessons', [
+    { text: 'Lesson 1: React Basics' },
+    { text: 'Lesson 2: Using Hooks' },
+    { text: 'Lesson 3: Styling with Tailwind' },
+  ]);
   const [input, setInput] = useState('');
   const [filter, setFilter] = useState('All');
 
   // Add a new task
   const addTask = () => {
     if (input.trim()) {
-      setTasks([...tasks, { text: input, completed: false }]);
+      setTasks([...tasks, { text: input }]);
       setInput('');
     }
   };
@@ -41,11 +45,6 @@ const TaskManager = () => {
   // Filter tasks based on selected filter
   const filteredTasks = tasks.filter(FILTERS[filter]);
 
-  useEffect(() => {
-    // Example side effect: log tasks
-    // console.log("Tasks updated:", tasks);
-  }, [tasks]);
-
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,8 +53,8 @@ const TaskManager = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded shadow w-full max-w-lg">
-      <h2 className="text-xl font-bold mb-4">Tasks</h2>
+    <div className="bg-white/80 dark:bg-gray-800/80 p-6 rounded shadow w-full max-w-lg mx-auto">
+      <h2 className="text-xl font-bold mb-4">Lessons</h2>
       {/* Task input form */}
       <form onSubmit={handleSubmit} className="mb-4">
         <div className="flex gap-2">
@@ -63,8 +62,9 @@ const TaskManager = () => {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Add a new task..."
-            className="flex-grow px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
+            placeholder="Add a new lesson"
+            className="flex-1 px-2 py-1 rounded border dark:bg-gray-700"
+            onKeyDown={(e) => e.key === 'Enter' && addTask()}
           />
           <Button type="submit" variant="primary">
             Add Task
@@ -93,7 +93,7 @@ const TaskManager = () => {
         {filteredTasks.map((task, idx) => (
           <li
             key={idx}
-            className="flex items-center justify-between py-1 border-b border-gray-200 dark:border-gray-700"
+            className="py-1 border-b border-gray-200 dark:border-gray-700"
           >
             <span
               className={`flex-1 cursor-pointer ${

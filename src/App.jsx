@@ -5,6 +5,7 @@ import About from "./pages/About";
 import ApiData from "./components/ApiData";
 import { useState } from "react"; 
 import Card from "./components/Card";
+import TaskManager from "./components/TaskManager"; // <-- Add this import
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,41 +27,8 @@ function App() {
           </header>
 
           <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg p-6">
-              <div className="flex flex-col items-center justify-center">
-                <p className="text-lg mb-4">
-                  Edit{" "}
-                  <code className="font-mono bg-gray-200 dark:bg-gray-700 p-1 rounded">
-                    src/App.jsx
-                  </code>{" "}
-                  and save to test HMR
-                </p>
-
-                <div className="flex items-center gap-4 my-4">
-                  <button
-                    onClick={() => setCount((count) => count - 1)}
-                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
-                  >
-                    -
-                  </button>
-                  <span className="text-xl font-bold">{count}</span>
-                  <button
-                    onClick={() => setCount((count) => count + 1)}
-                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
-                  >
-                    +
-                  </button>
-                </div>
-
-                <button onClick={toggleTheme} className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700">
-                  {theme === "dark" ? "🌙" : "☀️"}
-                </button>
-
-                <p className="text-gray-500 dark:text-gray-400 mt-4">
-                  Implement your TaskManager component here
-                </p>
-              </div>
-            </div>
+            {/* Add TaskManager here */}
+            <TaskManager />
 
             {/* API data display will go here */}
             <div className="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg p-6">
